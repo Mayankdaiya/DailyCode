@@ -1,5 +1,5 @@
 import java.util.*;
-
+//only for sorted array
 class SearchBinary{
     public static int search(int arr[],int si,int ei,int n){
         int mid=si+(ei-si)/2;
