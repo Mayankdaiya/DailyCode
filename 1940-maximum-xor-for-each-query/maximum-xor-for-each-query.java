@@ -1,22 +1,12 @@
 class Solution {
     public int[] getMaximumXor(int[] nums, int maximumBit) {
-        int arr[]=new int[nums.length];
-        arr[0]=nums[0];
-        for(int i=1;i<nums.length;i++){
-            arr[i]=arr[i-1]^nums[i];
-        }
+        int xor=0, max=(int)Math.pow(2,maximumBit)-1;
+        for(int i:nums) xor^=i;
+        int res[]=new int[nums.length];
         for(int i=0;i<nums.length;i++){
-            int t=arr[nums.length-i-1], ans=0;
-            for(int j=maximumBit-1;j>=0;j--){
-                int bit=1<<j;
-                if((bit^t)>=t){
-                    t=t^bit;
-                    ans+=bit;
-                }
-            }
-            nums[i]=ans;
+            res[i]=xor^max;
+            xor^=nums[nums.length-i-1];
         }
-
-        return nums;
+        return res;
     }
 }
