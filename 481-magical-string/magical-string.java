@@ -1,30 +1,26 @@
 class Solution {
     public int magicalString(int n) {
-        StringBuilder st=new StringBuilder("122");
-        int p1=2,p2=st.length(),count=0;
-        while(st.length()<n){
-            if(st.charAt(p1)=='1'){
-                if(st.charAt(p2-1)=='1')
-                    st.append(2);
-                else
-                    st.append(1);
-                p2++;
-            }
-            else{
-                if(st.charAt(p2-1)=='1')
-                    st.append(22);
-                else
-                    st.append(11);
-                p2+=2;
-            }
-            
-            //p2++;
-            p1++;
+        StringBuilder str=new StringBuilder("122");
+        int in=2, c=1;
+        while(str.length()<n){
+            int len=str.length();
+            char ch=str.charAt(in), ch2=str.charAt(len-1);
+            if(ch=='2'){
+                if(ch2=='2'){ 
+                    str.append("11"); c+=2;
+                    if(str.length()>n) c--;
+                }
+                else {
+                    str.append("22");
+                }
+            } else {
+                if(ch2=='2'){ 
+                    str.append('1'); c++;
+                }
+                else str.append('2');
+            } 
+            in++;
         }
-        for(int i=0;i<n;i++){
-            if(st.charAt(i)=='1')
-                count++;
-        }
-        return count;
+        return c;
     }
 }
