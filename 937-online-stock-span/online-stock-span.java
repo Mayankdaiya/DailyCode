@@ -1,17 +1,27 @@
 class StockSpanner {
-    List<Integer> list;
+    List<int[]> list;
     public StockSpanner() {
         list=new ArrayList<>();
     }
     
     public int next(int price) {
-        list.add(price);
-        int c=1;
-        for(int i=list.size()-2;i>=0;i--){
-            if(list.get(i)>price) break;
-            c++;
+        if(list.isEmpty()){
+            list.add(new int[]{price,1});
+            return 1;
         }
-        return c;
+        int t1=list.get(list.size()-1)[0], t2=list.get(list.size()-1)[1], c=t2; 
+        if(t1<=price){ 
+            int t=list.size()-1-t2;
+            while(t>=0){
+                if(list.get(t)[0]<=price) c+=list.get(t)[1];
+                else break;
+                t-=list.get(t)[1];
+            }
+            list.add(new int[]{price,c+1});
+            return c+1;
+        }
+        list.add(new int[]{price,1});
+        return 1;
     }
 }
 
