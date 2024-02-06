@@ -3,21 +3,18 @@ class Solution {
         List<List<String>> res=new ArrayList<>();
         for(int i=0;i<str.length;i++){
             if(str[i].equals("-1")) continue;
-            int ch[]=new int[26];
-            for(int j=0;j<str[i].length();j++){
-                ch[str[i].charAt(j)-'a']++;
-            }
             List<String> list=new ArrayList<>();
             list.add(str[i]);
             for(int j=i+1;j<str.length;j++){
-                if(str[j].equals("-1")) continue;
-                int m[]=new int[26];
+                if(str[j].equals("-1") || str[j].length()!=str[i].length()) continue;
+                int ch[]=new int[26];
                 for(int k=0;k<str[j].length();k++){
-                    m[str[j].charAt(k)-'a']++;
+                    ch[str[j].charAt(k)-'a']++;
+                    ch[str[i].charAt(k)-'a']--;
                 }
                 int f=0;
                 for(int k=0;k<26;k++){
-                    if(ch[k]!=m[k]){
+                    if(ch[k]!=0){
                         f=1;
                         break;
                     }
