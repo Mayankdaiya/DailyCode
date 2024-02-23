@@ -1,13 +1,13 @@
 class Solution {
     public int findJudge(int n, int[][] trust) {
         if(n==1) return 1;
-        Map<Integer,Integer> map=new HashMap<>();
+        int arr[]=new int[n+1];
         for(int i=0;i<trust.length;i++){
-            map.put(trust[i][0],map.getOrDefault(trust[i][0],0)-1);
-            map.put(trust[i][1],map.getOrDefault(trust[i][1],0)+1);
+            arr[trust[i][0]]--;
+            arr[trust[i][1]]++;
         }
-        for(int key:map.keySet()){
-            if(map.get(key)>=(n-1)) return key;
+        for(int i=1;i<=n;i++){
+            if(arr[i]==n-1) return i;
         }
         return -1;
     }
