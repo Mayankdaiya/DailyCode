@@ -1,31 +1,31 @@
 class Solution {
-    public List<List<String>> groupAnagrams(String[] str) {
-        List<List<String>> res=new ArrayList<>();
-        for(int i=0;i<str.length;i++){
-            if(str[i].equals("-1")) continue;
-            List<String> list=new ArrayList<>();
-            list.add(str[i]);
-            for(int j=i+1;j<str.length;j++){
-                if(str[j].equals("-1") || str[j].length()!=str[i].length()) continue;
-                int ch[]=new int[26];
-                for(int k=0;k<str[j].length();k++){
-                    ch[str[j].charAt(k)-'a']++;
-                    ch[str[i].charAt(k)-'a']--;
-                }
-                int f=0;
-                for(int k=0;k<26;k++){
-                    if(ch[k]!=0){
-                        f=1;
-                        break;
-                    }
-                }
-                if(f==0){ 
-                    list.add(str[j]);
-                    str[j]="-1";
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> list=new ArrayList<>();
+        list.add(new ArrayList<>(Arrays.asList(strs[0])));
+        for(int i=1;i<strs.length;i++){
+            int f=0;
+            for(int j=0;j<list.size();j++){
+                if(check(list.get(j).get(0),strs[i])){
+                    list.get(j).add(strs[i]); f=1;
+                    break;
                 }
             }
-            res.add(list);
+            if(f==0){
+                list.add(new ArrayList<>(Arrays.asList(strs[i])));
+            }
+        }  
+        return list;      
+    }
+    public static boolean check(String s1,String s2){
+        if(s1.length()!=s2.length()) return false;
+        int ch[]=new int[26];
+        for(int i=0;i<s1.length();i++){
+            ch[s1.charAt(i)-'a']++;
+            ch[s2.charAt(i)-'a']--;
         }
-        return res;
+        for(int i=0;i<26;i++){
+            if(ch[i]!=0) return false;
+        }
+        return true;
     }
 }
