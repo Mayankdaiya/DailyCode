@@ -11,7 +11,6 @@ class Solution {
             score[i]=score[score.length-1-i];
             score[score.length-1-i]=t;
         }
-        System.out.println(Arrays.toString(score));
         for(int i=0;i<score.length;i++){
             int t=map.get(score[i]);
             if(i==0) res[t]="Gold Medal";
