@@ -1,19 +1,18 @@
 class Solution {
     public int maxSatisfied(int[] customers, int[] grumpy, int minutes) {
-        int cus=0;
-        for(int i=0;i<customers.length;i++){
-            if(grumpy[i]==0) cus+=customers[i];
+        int res=0, z=0, mx=0, i=0, n=customers.length;
+        while(i<minutes){
+            if(grumpy[i]==0) res+=customers[i];
+            else mx+=customers[i];
+            i++;
         }
-        int Maxc=0;
-        for(int i=0;i<minutes && i<grumpy.length;i++){
-            if(grumpy[i]==1) Maxc+=customers[i];
+        z=mx;
+        for(i=minutes;i<n;i++){
+            if(grumpy[i]==0) res+=customers[i];
+            else z+=customers[i];
+            if(grumpy[i-minutes]==1) z-=customers[i-minutes];
+            if(z>mx) mx=z; 
         }
-        int c=Maxc;
-        for(int i=minutes;i<grumpy.length;i++){
-            if(grumpy[i-minutes]==1) c-=customers[i-minutes];
-            if(grumpy[i]==1) c+=customers[i];
-            if(c>Maxc) Maxc=c; 
-        }
-        return Maxc+cus;
+        return res+mx;
     }
 }
