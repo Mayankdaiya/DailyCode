@@ -23,7 +23,6 @@ class Solution {
         });
         for(int i=0;i<nums.length;i++){
             nums[i]=obj[i].num;
-            System.out.print(obj[i].val+" ");
         }
         return nums;
     }
