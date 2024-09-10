@@ -21,9 +21,12 @@ class Solution {
         return head;
     }
     public static int gcd(int n,int m){
-        for(int i=n;i>0;i--){
-            if(n%i==0 && m%i==0) return i;
+        if(n==1 || m==1) return 1;
+        while(m!=0){
+            int rem=n%m;
+            n=m;
+            m=rem;
         }
-        return 1;
+        return n;
     }
 }
