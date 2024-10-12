@@ -1,18 +1,15 @@
 class Solution {
     public int minGroups(int[][] intervals) {
-        int size=0, n=intervals.length;
+        int n=intervals.length;
+        TreeMap<Integer,Integer> map=new TreeMap<>();
         for(int i=0;i<n;i++){
-            size=Math.max(size,intervals[i][1]);
+            map.put(intervals[i][0],map.getOrDefault(intervals[i][0],0)+1);
+            map.put(intervals[i][1]+1,map.getOrDefault(intervals[i][1]+1,0)-1);
         }
-        int arr[]=new int[size+2];
-        for(int i=0;i<n;i++){
-            arr[intervals[i][0]]++;
-            arr[intervals[i][1]+1]--;
-        }
-        int res=0;
-        for(int i=1;i<=size+1;i++){
-            arr[i]+=arr[i-1];
-            res=Math.max(res,arr[i]);
+        int size=0, res=0;
+        for(int key:map.keySet()){
+            size+=map.get(key);
+            res=Math.max(res,size);
         }
         return res==0?1:res;
     }
