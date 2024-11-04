@@ -7,7 +7,7 @@ class Solution {
             while(in<word.length() && ch==word.charAt(in) && c<9){
                 in++; c++;
             }
-            str.append(c+""+ch);
+            str.append(c).append(ch);
             i=in-1;
         }   
         return str.toString();
