@@ -1,16 +1,16 @@
 class Solution {
     public int largestCombination(int[] candidates) {
-        HashMap<Integer,Integer> map=new HashMap<>();
+        int map[]=new int[24];
         int length=0;
         for(int i=0;i<candidates.length;i++){
-            int el=candidates[i], p=1;
+            int el=candidates[i], p=1, in=0;
             while(el>0){
                 if((el&p)==p){
-                   map.put(p,map.getOrDefault(p,0)+1); 
-                   length=Math.max(length,map.get(p)); 
+                   map[in]++; 
+                   length=Math.max(length,map[in]); 
                    el-=p;
                 }
-                p*=2;
+                p*=2; in++;
             }
         }
         return length;
