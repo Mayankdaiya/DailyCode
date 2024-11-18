@@ -8,7 +8,6 @@ class Solution {
             curr+=code[j];
             j=(j+inc)%n;
         }
-        System.out.println(curr);
         for(int i=0;i<n;i++){
             res[i]=curr;
             if(k>0){
