@@ -14,7 +14,6 @@ class Solution {
                 t++; i++;
             }
         }
-        System.out.println(s);
         return t;
     }
 }
