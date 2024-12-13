@@ -1,28 +1,21 @@
 class Solution {
-    public class Pair{
-        int val, idx;
-        Pair(int val,int idx){
-            this.val=val;
-            this.idx=idx;
-        }
-    }
     public long findScore(int[] nums) {
-        PriorityQueue<Pair> q=new PriorityQueue<>((a,b)->{
-            if(a.val!=b.val) return a.val-b.val;
-            return a.idx-b.idx;
-        });
-        int n=nums.length;
-        for(int i=0;i<n;i++){
-            q.add(new Pair(nums[i],i));
+        int arr[][]=new int[nums.length][2];
+        for(int i=0;i<nums.length;i++){
+            arr[i][0]=nums[i];
+            arr[i][1]=i;
         }
+        Arrays.sort(arr,(int a[],int b[])->{
+            if(a[0]!=b[0]) return a[0]-b[0];
+            return a[1]-b[1];
+        });
         long res=0;
-        Set<Integer> set=new HashSet<>();
-        while(!q.isEmpty()){
-            Pair t=q.poll();
-            if(!set.contains(t.idx)){
-                res+=t.val;
-                if(t.idx-1>=0) set.add(t.idx-1);
-                if(t.idx+1<n) set.add(t.idx+1);
+        for(int i=0;i<nums.length;i++){
+            int val=arr[i][0], idx=arr[i][1];
+            if(nums[idx]!=-1){
+                res+=val;
+                if(idx-1>=0) nums[idx-1]=-1;
+                if(idx+1<nums.length) nums[idx+1]=-1;
             }
         }
         return res;
