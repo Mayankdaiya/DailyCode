@@ -9,14 +9,11 @@ class Solution {
         while(i>=0){
             if(ch[i]>0){
                 int t=0, j=i-1;
-                // System.out.println((char)('a'+i)+"-"+ch[i]);
                 while(t++<ch[i]){
                     str.append((char)('a'+i));
-                    // System.out.println(t);
                     if(t<ch[i] && t%rl==0){
                         while(j>=0 && ch[j]==0) j--;
                         if(j<0 || ch[j]==0) break;
-                        // System.out.println("j-"+(char)('a'+j));
                         str.append((char)('a'+j)); 
                         ch[j]--;
                     }
