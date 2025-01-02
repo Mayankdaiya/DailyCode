@@ -1,23 +1,23 @@
 class Solution {
     public int[] vowelStrings(String[] words, int[][] queries) {
-        int freq[]=new int[words.length];
+        int arr[]=new int[words.length];
         for(int i=0;i<words.length;i++){
-            char ch1=words[i].charAt(0), ch2=words[i].charAt(words[i].length()-1);
-            if(check(ch1,ch2)){
-                freq[i]=1;
-            }
-            if(i!=0) freq[i]+=freq[i-1];
+            if(isVowel(words[i],words[i].length())) arr[i]=1;
+            if(i>0) arr[i]+=arr[i-1];
         }
-        int ans[]=new int[queries.length];
-        for(int i=0;i<queries.length;i++){
-            int st=queries[i][0], en=queries[i][1];
-            if(st!=0) ans[i]=freq[en]-freq[st-1];
-            else ans[i]=freq[en];
+        int res[]=new int[queries.length];
+        for(int i=0;i<res.length;i++){
+            int t=queries[i][0];
+            if(t!=0) t=arr[t-1];
+            res[i]=arr[queries[i][1]]-t;
         }
-        return ans;
+        return res;
     }
-    public static boolean check(char ch1,char ch2){
-        if((ch1=='a' || ch1=='e' || ch1=='i' || ch1=='o' || ch1=='u') && (ch2=='a' || ch2=='e' || ch2=='i' || ch2=='o' || ch2=='u')) return true;
+    public static boolean isVowel(String w,int n){
+        char ch1=w.charAt(0), ch2=w.charAt(n-1);
+        if(ch1=='a' || ch1=='e' || ch1=='i' || ch1=='o' || ch1=='u'){
+            if(ch2=='a' || ch2=='e' || ch2=='i' || ch2=='o' || ch2=='u') return true;
+        }
         return false;
     }
 }
