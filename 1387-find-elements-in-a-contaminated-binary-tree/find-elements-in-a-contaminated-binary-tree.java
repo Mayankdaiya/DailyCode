@@ -14,9 +14,10 @@
  * }
  */
 class FindElements {
-    TreeNode tree;
+    Set<Integer> set;
     public FindElements(TreeNode root) {
-        tree=root;
+        set=new HashSet<>();
+        set.add(0);
         root.val=0;
         Queue<TreeNode> q=new LinkedList<>();
         q.add(root);
@@ -25,20 +26,18 @@ class FindElements {
             if(t.left!=null){
                 t.left.val=t.val*2+1;
                 q.add(t.left);
+                set.add(t.left.val);
             } 
             if(t.right!=null){
                 t.right.val=t.val*2+2;
                 q.add(t.right);
+                set.add(t.right.val);
             } 
         }
     }
     
     public boolean find(int target) {
-        return contains(tree,target);
-    }
-    public boolean contains(TreeNode tree,int target){
-        if(tree==null) return false;
-        return tree.val==target || contains(tree.left,target) || contains(tree.right,target);
+        return set.contains(target);
     }
 }
 
