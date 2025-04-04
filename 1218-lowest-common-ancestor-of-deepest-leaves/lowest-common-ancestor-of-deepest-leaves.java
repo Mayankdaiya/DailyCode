@@ -15,20 +15,22 @@
  */
 class Solution {
     public TreeNode lcaDeepestLeaves(TreeNode root) {
-        return dfs(root).getKey();
+        int max = maxDepth(root); 
+        return dfs(root, max, 0);
     }
-    private Pair<TreeNode, Integer> dfs(TreeNode root) {
-        if (root == null) {
-            return new Pair<>(null, 0);
-        }
-        Pair<TreeNode, Integer> left = dfs(root.left);
-        Pair<TreeNode, Integer> right = dfs(root.right);
-        if(left.getValue() > right.getValue()) {
-            return new Pair<>(left.getKey(), left.getValue() + 1);
-        }
-        if(left.getValue() < right.getValue()) {
-            return new Pair<>(right.getKey(), right.getValue() + 1);
-        }
-        return new Pair<>(root, left.getValue() + 1);
+    
+    private TreeNode dfs(TreeNode root, int max, int len) {
+        if (root == null) return null;
+        if (max - 1 == len) return root;
+        TreeNode left = dfs(root.left, max, len + 1);
+        TreeNode right = dfs(root.right, max, len + 1);
+        
+        if (left != null && right != null) return root;
+        return left != null ? left : right;
+    }
+    
+    private int maxDepth(TreeNode root) {
+        if (root == null) return 0;
+        return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
     }
 }
