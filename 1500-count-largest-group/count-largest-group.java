@@ -5,10 +5,11 @@ class Solution {
         for(int i=1;i<=n;i++){
             int t=digitSum(i);
             map.put(t,map.getOrDefault(t,0)+1);
-            maxSize=Math.max(maxSize,map.get(t));
-        }
-        for(int key:map.keySet()){
-            if(map.get(key)==maxSize) count++;
+            if(maxSize==map.get(t)) count++;
+            else if(maxSize<map.get(t)){
+                maxSize=map.get(t);
+                count=1;
+            }
         }
         return count;
     }
