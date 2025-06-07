@@ -1,5 +1,4 @@
 class Solution {
-
     public String robotWithString(String s) {
         int[] cnt = new int[26];
         for (char c : s.toCharArray()) {
