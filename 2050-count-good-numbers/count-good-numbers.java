@@ -1,17 +1,22 @@
 class Solution {
-    long mod=1000000007;
     public int countGoodNumbers(long n) {
-        return (int)((solve(5,(n+1)/2)*solve(4,n/2))%mod);
+        if(n==1) return 5;
+        long even = (n+1)/2, odd = n/2, mod = 1000000007;
+        return (int)((helper(5,even,mod)*helper(4,odd,mod))%mod);
     }
-    public long solve(int x,long y){
-        long res=1, cal=x;
-        while(y>0){
-            if(y%2==1) res=(res*cal)%mod;
-            cal=(cal*cal)%mod;
-            y/=2;
+
+    public long helper(long base,long expo,long mod){
+        long ans = 1;
+        while(expo>0){
+            if(expo%2==0) {
+                base = (base*base)%mod;
+                expo = expo/2;
+            }
+            else {
+                ans = (ans*base)%mod;
+                expo-=1;
+            }
         }
-        return res;
-    }
+        return ans;
+    } 
 }
-
-
