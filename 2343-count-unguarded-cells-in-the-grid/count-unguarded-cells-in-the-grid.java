@@ -2,12 +2,12 @@ class Solution {
     public int countUnguarded(int m, int n, int[][] guards, int[][] walls) {
         int mat[][]=new int[m][n];
         int arr[][]=new int[m][n];
-        for(int i=0;i<guards.length;i++){
-            mat[guards[i][0]][guards[i][1]]=1;
-            arr[guards[i][0]][guards[i][1]]=1;
+        for(int el[]: guards){
+            mat[el[0]][el[1]]=1;
+            arr[el[0]][el[1]]=1;
         }
-        for(int i=0;i<walls.length;i++){
-            mat[walls[i][0]][walls[i][1]]=-1;
+        for(int el[]: walls){
+            mat[el[0]][el[1]]=-1;
         }
         for(int i=0;i<m;i++){
             for(int j=1;j<n;j++){
