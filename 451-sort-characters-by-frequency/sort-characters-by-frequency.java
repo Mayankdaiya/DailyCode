@@ -21,6 +21,7 @@ class Solution {
             char ch=(char)(arr[i][0]);
             for(int j=0;j<arr[i][1];j++) res.append(ch);
         }
+        
         return res.toString();
     }
 }
